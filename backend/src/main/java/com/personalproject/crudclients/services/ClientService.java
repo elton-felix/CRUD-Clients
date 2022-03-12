@@ -49,7 +49,7 @@ public class ClientService {
 	public ClientDTO update(Long id, ClientDTO dto) {
 		try {
 			Client entity = repository.getOne(id);
-			entity.setName(dto.getName());
+			entity = CopyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new ClientDTO(entity);
 			
