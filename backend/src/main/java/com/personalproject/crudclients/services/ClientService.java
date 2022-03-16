@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.personalproject.crudclients.dto.ClientDTO;
 import com.personalproject.crudclients.entities.Client;
 import com.personalproject.crudclients.repositories.ClientRepository;
-import com.personalproject.crudclients.services.exeptions.DataBaseException;
+import com.personalproject.crudclients.services.exeptions.DatabaseException;
 import com.personalproject.crudclients.services.exeptions.ResourceNotFoundException;
 
 @Service
@@ -45,7 +45,7 @@ public class ClientService {
 	public ClientDTO insert(ClientDTO dto) {
 		Client entity = new Client();
 		entity = CopyDtoToEntity(dto, entity);
-		entity = repository.save(entity);
+		entity = repository.save(entity); 
 		
 		return new ClientDTO(entity);
 	}
@@ -70,7 +70,7 @@ public class ClientService {
 			throw new ResourceNotFoundException("Id not found "+id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DataBaseException("Integraty violation");
+			throw new DatabaseException("Integraty violation");
 		}
 	}
 	
